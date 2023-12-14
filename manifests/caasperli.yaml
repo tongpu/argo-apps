@@ -11,4 +11,4 @@ spec:
   source:
     repoURL: https://charts.adfinis.com
     chart: caasperli
-    targetRevision: *
+    targetRevision: '*'
