@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: caasperli
+  namespace: infra-argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://argoproj.github.io/argo-helm
+    chart: argocd-apps
+    targetRevision: '*'
+    helm:
+      valuesObject:
+        applications:
+          - name: caasperli
+            namespace: infra-argocd
+            destination:
+              namespace: default
+              server: https://kubernetes.default.svc
+            project: default
+            source:
+              repoURL: https://charts.adfinis.com
+              chart: caasperli
+              targetRevision: '*'
+          - name: helm-guestbook
+            namespace: infra-argocd
+            destination:
+              namespace: default
+              server: https://kubernetes.default.svc
+            project: default
+            source:
+              repoURL: https://github.com/argoproj/argocd-example-apps.git
+              path: helm-guestbook
+              targetRevision: d7927a27b4533926b7d86b5f249cd9ebe7625e90
